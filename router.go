@@ -11,5 +11,5 @@ func init() {
 	rand.Seed(time.Now().Unix())
 
 	http.HandleFunc("/random", random.GenerateRandomHandler)
-	http.HandleFunc("/get-randoms", random.ListRandomsHandler)
+	http.HandleFunc("/list-randoms", random.ListRandomsHandler)
 }
