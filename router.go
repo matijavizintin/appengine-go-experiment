@@ -5,6 +5,7 @@ import (
 	"random"
 	"math/rand"
 	"net/http"
+	"redirector"
 )
 
 func init() {
@@ -12,4 +13,5 @@ func init() {
 
 	http.HandleFunc("/random", random.GenerateRandomHandler)
 	http.HandleFunc("/list-randoms", random.ListRandomsHandler)
+	http.HandleFunc("/redirect", redirector.RedirectHandler)
 }
