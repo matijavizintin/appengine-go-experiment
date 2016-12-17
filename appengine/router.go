@@ -1,11 +1,11 @@
 package main
 
 import (
-	"time"
-	"random"
 	"math/rand"
 	"net/http"
+	"random"
 	"redirector"
+	"time"
 )
 
 func init() {
