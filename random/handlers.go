@@ -1,10 +1,10 @@
 package random
 
 import (
-	"time"
-	"net/http"
-	"math/rand"
 	"fmt"
+	"math/rand"
+	"net/http"
+	"time"
 
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
@@ -36,11 +36,10 @@ func GenerateRandomHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	rec := &Record{
-		Source: r.RemoteAddr,
+		Source:    r.RemoteAddr,
 		Generated: generated,
 		Timestamp: time.Now(),
 	}
-
 
 	key := datastore.NewIncompleteKey(ctx, "randoms", nil)
 	_, err = datastore.Put(ctx, key, rec)
