@@ -1,11 +1,14 @@
 package redirector
 
 import (
+	"log"
 	"math/rand"
 	"net/http"
 )
 
-func RedirectHandler(w http.ResponseWriter, r *http.Request) {
+func RedirectorHandler(w http.ResponseWriter, r *http.Request) {
+	log.Printf("Redirect request from %s\n", r.RequestURI)
+
 	url := calculateRedirectUrl()
 	if url == "" {
 		w.WriteHeader(http.StatusOK)
@@ -15,7 +18,6 @@ func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func calculateRedirectUrl() string {
-	// TODO matijav 17.12.2016 read from datastore
 	idx := rand.Intn(len(ENDPOINTS)) + 1
 	if idx == len(ENDPOINTS) {
 		return ""

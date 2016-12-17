@@ -1,0 +1,6 @@
+# Compile
+
+GOOS=linux GOARCH=arm go build router.go
+
+# Run
+./router.go
