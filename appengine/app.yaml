@@ -13,3 +13,8 @@ handlers:
 
 automatic_scaling:
   max_concurrent_requests: 80
+  min_pending_latency: 1000ms
+  max_idle_instances: 1
+
+#manual_scaling:
+#  instances: 1
