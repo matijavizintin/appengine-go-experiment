@@ -11,3 +11,5 @@ handlers:
 - url: /.*
   script: _go_app
 
+automatic_scaling:
+  max_concurrent_requests: 80
