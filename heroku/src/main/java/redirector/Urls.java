@@ -7,6 +7,6 @@ public interface Urls {
     String[] ENDPOINTS = {
             "https://infinite-ocean-79123.herokuapp.com/redirect",
             "https://fresh-argon-152122.appspot.com/redirect",
-            "http://croco.si:9082/redirect"
+            "https://croco.si:9082/redirect"
     };
 }
