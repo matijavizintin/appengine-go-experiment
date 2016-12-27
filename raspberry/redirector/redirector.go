@@ -18,7 +18,7 @@ func RedirectorHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func calculateRedirectUrl() string {
-	idx := rand.Intn(len(ENDPOINTS)) + 1
+	idx := rand.Intn(len(ENDPOINTS) + 1)
 	if idx == len(ENDPOINTS) {
 		return ""
 	}
