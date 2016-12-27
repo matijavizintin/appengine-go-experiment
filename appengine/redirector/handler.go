@@ -1,12 +1,22 @@
 package redirector
 
 import (
+	"golang.org/x/net/context"
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
+	"google.golang.org/appengine/log"
 	"math/rand"
 	"net/http"
 )
 
 func RedirectHandler(w http.ResponseWriter, r *http.Request) {
-	url := calculateRedirectUrl()
+	ctx := appengine.NewContext(r)
+
+	url, err := calculateRedirectUrl(ctx)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 	if url == "" {
 		w.WriteHeader(http.StatusOK)
 		return
@@ -14,11 +24,17 @@ func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, url, http.StatusFound)
 }
 
-func calculateRedirectUrl() string {
-	// TODO matijav 17.12.2016 read from datastore
-	idx := rand.Intn(len(ENDPOINTS)) + 1
-	if idx == len(ENDPOINTS) {
-		return ""
+func calculateRedirectUrl(ctx context.Context) (string, error) {
+	redirects := []Redirect{}
+	_, err := datastore.NewQuery("redirect").GetAll(ctx, &redirects)
+	if err != nil {
+		log.Errorf(ctx, "%v", err)
+		return "", err
 	}
-	return ENDPOINTS[idx]
+
+	idx := rand.Intn(len(redirects) + 1)
+	if idx == len(redirects) {
+		return "", nil
+	}
+	return redirects[idx].Endpoint, nil
 }
