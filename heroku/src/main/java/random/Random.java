@@ -14,6 +14,9 @@ public class Random extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        resp.setStatus(HttpServletResponse.SC_OK);
+
         resp.getWriter().print(UUID.randomUUID().toString());
     }
 }

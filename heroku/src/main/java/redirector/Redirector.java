@@ -22,6 +22,7 @@ public class Redirector extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             return;
         }
+
         resp.sendRedirect(endpoint);
     }
 
