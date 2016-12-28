@@ -20,7 +20,20 @@ func main() {
 	http.HandleFunc("/redirect", redirector.RedirectorHandler)
 
 	log.Println("Starting server")
-	err = http.ListenAndServeTLS(":9082", "cert.pem", "key.pem", nil)
+
+	go runHTTPSServer()
+	runHTTPServer()
+}
+
+func runHTTPServer() {
+	err := http.ListenAndServe(":9082", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func runHTTPSServer() {
+	err := http.ListenAndServeTLS(":9083", "cert.pem", "key.pem", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
