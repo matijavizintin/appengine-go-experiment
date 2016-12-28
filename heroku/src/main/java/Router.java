@@ -20,6 +20,14 @@ public class Router {
     public static void main(String[] args) throws Exception {
         Server server = new Server(Integer.valueOf(System.getenv("PORT")));
 
+        ServletContextHandler redirector = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        redirector.setContextPath("/redirect");
+        redirector.addServlet(new ServletHolder(new Redirector()), "/*");
+
+        ServletContextHandler random = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        random.setContextPath("/random");
+        random.addServlet(new ServletHolder(new Random()), "/*");
+
         ServletContextHandler root = new ServletContextHandler(ServletContextHandler.SESSIONS);
         root.setContextPath("/");
         root.addServlet(new ServletHolder(new HttpServlet() {
@@ -32,19 +40,11 @@ public class Router {
             }
         }), "/*");
 
-        ServletContextHandler redirector = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        redirector.setContextPath("/redirect");
-        redirector.addServlet(new ServletHolder(new Redirector()), "/*");
-
-        ServletContextHandler random = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        random.setContextPath("/random");
-        random.addServlet(new ServletHolder(new Random()), "/*");
-
         HandlerCollection handlerCollection = new HandlerCollection();
         handlerCollection.setHandlers(new Handler[]{
-                root,
                 redirector,
                 random,
+                root,
         });
 
         server.setHandler(handlerCollection);
