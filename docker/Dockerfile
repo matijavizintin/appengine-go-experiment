@@ -1,6 +1,7 @@
-FROM ubuntu
+FROM golang
 MAINTAINER matija matija.vizintin@gmail.com
 
+ADD server.go server.go
 RUN go build server.go
-ADD server server
-RUN server
+
+CMD ["./server"]

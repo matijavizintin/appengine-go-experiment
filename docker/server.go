@@ -15,3 +15,9 @@ func (i indexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte("Hello"))
 }
+
+type healthCheckHandler struct{}
+
+func (i healthCheckHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
