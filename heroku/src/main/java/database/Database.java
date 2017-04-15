@@ -33,7 +33,6 @@ public class Database {
         }
     }
 
-    // TODO: 28/12/2016 cache database connections
     public static synchronized Connection getConnection() {
         if (connectionsPool.empty()) {
             throw new NoMoreConnectionsException();
