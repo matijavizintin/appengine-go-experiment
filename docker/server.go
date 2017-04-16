@@ -4,6 +4,7 @@ import "net/http"
 
 func main() {
 	http.Handle("/", &indexHandler{})
+	http.Handle("/healthcheck/", &healthCheckHandler{})
 
 	http.ListenAndServe(":8080", nil)
 }
