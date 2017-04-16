@@ -1,6 +1,10 @@
 package main
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+	"os"
+)
 
 func main() {
 	http.Handle("/", &indexHandler{})
@@ -14,7 +18,7 @@ type indexHandler struct{}
 func (i indexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
-	w.Write([]byte("Hello"))
+	w.Write([]byte(fmt.Sprintf("Hello from %s", os.Hostname())))
 }
 
 type healthCheckHandler struct{}
