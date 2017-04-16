@@ -18,7 +18,8 @@ type indexHandler struct{}
 func (i indexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
-	w.Write([]byte(fmt.Sprintf("Hello from %s", os.Hostname())))
+	hostname, _ := os.Hostname()
+	w.Write([]byte(fmt.Sprintf("Hello from %s", hostname)))
 }
 
 type healthCheckHandler struct{}
