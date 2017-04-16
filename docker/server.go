@@ -27,15 +27,17 @@ func (i indexHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func doSomeCpuIntensiveWork() {
+	const loops = 100 * 1000
+
 	slice := []int{}
 
-	for i := 0; i < 10000000; i++ {
-		slice = append(slice, 10000000-i)
+	for i := 0; i < loops; i++ {
+		slice = append(slice, loops-i)
 	}
 	sort.Ints(slice)
 
 	sum := 0.
-	for i := 0; i < 1000000; i++ {
+	for i := 0; i < loops; i++ {
 		sqrt := math.Sqrt(float64(i))
 		sum += sqrt
 	}
