@@ -43,3 +43,6 @@ buildNumber.properties
 
 # Exclude maven wrapper
 !/.mvn/wrapper/maven-wrapper.jar
+
+# sensitive
+allowed.go

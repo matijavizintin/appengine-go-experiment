@@ -1,7 +1,7 @@
 application: fresh-argon-152122
 runtime: go
 api_version: go1
-version: 5
+version: 6
 
 handlers:
 - url: /
@@ -13,5 +13,5 @@ handlers:
 
 automatic_scaling:
   max_concurrent_requests: 80
-  min_pending_latency: 1000ms
+  min_pending_latency: 2000ms
   max_idle_instances: 1
