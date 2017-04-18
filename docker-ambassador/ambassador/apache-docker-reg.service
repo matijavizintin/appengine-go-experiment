@@ -1,0 +1,12 @@
+[Unit]
+Description=Register Apache
+After=etcd-amb-apache.service
+BindsTo=etcd-amb-apache.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStart=/usr/bin/docker run --link etcd-amb-apache.service:etcd -v /var/run/docker.sock:/var/run/docker.sock --rm polvi/docker-register apache.service 80 apache-A
+
+[X-Fleet]
+X-ConditionMachineOf=etcd-amb-apache.service

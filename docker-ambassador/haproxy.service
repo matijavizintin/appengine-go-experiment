@@ -1,0 +1,13 @@
+[Unit]
+Description=HAProxy consumer
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull matijavizintin/haproxy
+ExecStart=/usr/bin/docker run --name %n -p ${COREOS_PUBLIC_IPV4}:80:80 matijavizintin/haproxy
+ExecStop=/usr/bin/docker stop -t 3 %n
+
+[X-Fleet]
+X-ConditionMachineOf=apache-dyn-amb.service

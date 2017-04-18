@@ -1,0 +1,10 @@
+[Unit]
+Description=Apache web server service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull matijavizintin/apache
+ExecStart=/usr/bin/docker run --rm --name %n -p ${COREOS_PRIVATE_IPV4}::80 matijavizintin/apache
+ExecStop=/usr/bin/docker stop -t 3 %n
