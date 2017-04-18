@@ -2,7 +2,7 @@
 
 coreos:  
   etcd2:
-    discovery: https://discovery.etcd.io/d72d513ac938fa14919de5233b85b7f9
+    discovery: https://discovery.etcd.io/4e3ce17ea8f231c39a93eab83a64d493
     advertise-client-urls: http://$public_ipv4:2379
     initial-advertise-peer-urls: http://$private_ipv4:2380
     listen-client-urls: http://0.0.0.0:2379
