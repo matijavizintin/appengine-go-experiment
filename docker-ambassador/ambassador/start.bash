@@ -27,7 +27,7 @@ if [[ -f "$OVERRIDE/$CONFIG" ]]; then
 fi
 
 # Set backend IP address to machine's private IP address
-PRIVATE_IPV4=$(curl --header "Metadata-Flavor:Google" "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip")
+PRIVATE_IPV4=$(curl -sw "\n" --header "Metadata-Flavor:Google" "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip")
 sed -i -e "s/server apache private_ipv4:80 check/server apache ${PRIVATE_IPV4}:80 check/g" $HAPROXY/$CONFIG
 
 exec haproxy -f /etc/haproxy/haproxy.cfg -p "$PIDFILE"
