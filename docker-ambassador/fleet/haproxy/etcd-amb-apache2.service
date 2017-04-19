@@ -4,7 +4,7 @@ Description=Simple Apache ambassador 2
 [Service]
 ExecStartPre=-/usr/bin/docker kill %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStart=/usr/bin/docker run --rm --name %n polvi/simple-amb 127.0.0.1:2379
+ExecStart=/usr/bin/docker run --rm --name %n polvi/simple-amb 172.17.0.1:2379
 ExecStop=/usr/bin/docker stop -t 3 %n
 
 [X-Fleet]

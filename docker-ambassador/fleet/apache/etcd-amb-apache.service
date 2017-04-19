@@ -6,7 +6,7 @@ BindsTo=apache.service
 [Service]
 ExecStartPre=-/usr/bin/docker kill %n
 ExecStartPre=-/usr/bin/docker rm %n
-ExecStart=/usr/bin/docker run --rm --name %n polvi/simple-amb ${COREOS_PRIVATE_IPV4}:2379
+ExecStart=/usr/bin/docker run --rm --name %n polvi/simple-amb 172.17.0.1:2379
 ExecStop=/usr/bin/docker stop -t 3 %n
 
 [X-Fleet]
