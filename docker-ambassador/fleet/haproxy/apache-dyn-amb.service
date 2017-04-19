@@ -8,7 +8,7 @@ EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill %n
 ExecStartPre=-/usr/bin/docker rm %n
 ExecStartPre=/usr/bin/docker pull polvi/dynamic-etcd-amb
-ExecStart=/usr/bin/docker run --link etcd-amb-apache2.service:etcd --rm --name %n -p ${COREOS_PRIVATE_IPV4}:80:80 polvi/dynamic-etcd-amb apache-A 80
+ExecStart=/usr/bin/docker run --link etcd-amb-apache2.service:etcd --rm --name %n -p ${COREOS_PRIVATE_IPV4}:8000:80 polvi/dynamic-etcd-amb apache-A 80
 ExecStop=/usr/bin/docker stop -t 3 %n
 
 [X-Fleet]
