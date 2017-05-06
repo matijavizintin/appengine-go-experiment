@@ -22,13 +22,14 @@ esac
 
 if [ -z "${NAME}" ]; then exit 1; fi
 
+docker stop etcd
 docker rm etcd
-docker run -d --name etcd quay.io/coreos/etcd:v3.1.7 /usr/local/bin/etcd \
+docker run -d --net=host --name etcd quay.io/coreos/etcd:v3.1.7 /usr/local/bin/etcd \
  --name ${NAME} \
- --advertise-client-urls http://${PUBLIC_IPV4}:2379,http://${PUBLIC_IPV4}:4001 \
- --listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 \
+ --advertise-client-urls http://${PUBLIC_IPV4}:2379 \
+ --listen-client-urls http://${PUBLIC_IPV4}:2379 \
  --initial-advertise-peer-urls http://${PRIVATE_IPV4}:2380 \
- --listen-peer-urls http://0.0.0.0:2380 \
+ --listen-peer-urls http://${PUBLIC_IPV4}:2380 \
  --initial-cluster-token etcd-cluster-1 \
  --initial-cluster etcd0=http://${HOST0}:2380,etcd1=http://${HOST1}:2380,etcd2=http://${HOST2}:2380 \
  --initial-cluster-state new
