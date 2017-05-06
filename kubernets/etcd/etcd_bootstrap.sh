@@ -23,7 +23,7 @@ esac
 if [ -z "${NAME}" ]; then exit 1; fi
 
 docker run -d -v /usr/share/ca-certificates/:/etc/ssl/certs -p 4001:4001 -p 2380:2380 -p 2379:2379 \
- --rm --name etcd quay.io/coreos/etcd \
+ --name etcd quay.io/coreos/etcd \
  -name ${NAME} \
  -advertise-client-urls http://${PUBLIC_IPV4}:2379,http://${PUBLIC_IPV4}:4001 \
  -listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 \
