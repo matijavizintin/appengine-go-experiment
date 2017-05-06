@@ -13,4 +13,3 @@ ssh ${MASTER_NODE} 'sudo mv docker_opts_cni.env /etc/kubernetes/cni/'
 ssh ${MASTER_NODE} 'sudo mkdir -p /etc/kubernetes/cni/net.d'
 scp 10-flannel.conf ${MASTER_NODE}:
 ssh ${MASTER_NODE} 'sudo mv 10-flannel.conf /etc/kubernetes/cni/net.d/'
-
