@@ -23,8 +23,9 @@ if [ -z "${NAME}" ]; then exit 1; fi
 
 docker stop etcd
 docker rm etcd
-docker run -d --net=host --name etcd quay.io/coreos/etcd:v3.1.7 /usr/local/bin/etcd \
+docker run -d --net=host \
  --volume=/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt --volume=/var/lib/etcd:/etcd-data \
+ --name etcd quay.io/coreos/etcd:v3.1.7 /usr/local/bin/etcd \
  --name ${NAME} \
  --data-dir=/etcd-data \
  --advertise-client-urls http://${PRIVATE_IPV4}:2379 \
