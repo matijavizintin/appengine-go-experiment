@@ -13,5 +13,5 @@ export MASTER_HOST=10.132.0.2
 export WORKER1_IP=10.132.0.3
 export WORKER2_IP=10.132.0.4
 
-export WORKER_FQDN1=kube-worker1
-export WORKER_FQDN2=kube-worker2
+export WORKER1_FQDN=kube-worker1
+export WORKER2_FQDN=kube-worker2
