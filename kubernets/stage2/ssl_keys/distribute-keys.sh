@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-scp ca.pem ${MASTER_HOST}:
-scp apiserver.pem ${MASTER_HOST}:
-scp apiserver-key.pem ${MASTER_HOST}:
+scp certs/ca.pem ${MASTER_HOST}:
+scp certs/apiserver.pem ${MASTER_HOST}:
+scp certs/apiserver-key.pem ${MASTER_HOST}:
 
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/ssl'
 ssh ${MASTER_HOST} 'sudo mv *.pem /etc/kubernetes/ssl/'
