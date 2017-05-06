@@ -1,20 +1,14 @@
 #!/usr/bin/env bash
 
-HOST0=10.132.0.2
-HOST1=10.132.0.3
-HOST2=10.132.0.4
-
-#PRIVATE_IPV4=$(curl -sw "\n" --header "Metadata-Flavor:Google" "http://metadata/computeMetadata/v1/instance/network-interfaces/0/ip")
-
 NAME=""
 case ${COREOS_PRIVATE_IPV4} in
-    ${HOST0})
+    ${ETCD0})
        NAME="etcd0"
        ;;
-    ${HOST1})
+    ${ETCD1})
         NAME="etcd1"
         ;;
-    ${HOST2})
+    ${ETCD2})
         NAME="etcd2"
         ;;
 esac
@@ -33,5 +27,5 @@ docker run -d --net=host \
  --initial-advertise-peer-urls http://${COREOS_PRIVATE_IPV4}:2380 \
  --listen-peer-urls http://${COREOS_PRIVATE_IPV4}:2380 \
  --initial-cluster-token etcd-cluster-1 \
- --initial-cluster etcd0=http://${HOST0}:2380,etcd1=http://${HOST1}:2380,etcd2=http://${HOST2}:2380 \
+ --initial-cluster etcd0=http://${ETCD0}:2380,etcd1=http://${ETCD1}:2380,etcd2=http://${ETCD2}:2380 \
  --initial-cluster-state new
