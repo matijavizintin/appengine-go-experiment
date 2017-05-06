@@ -23,7 +23,7 @@ esac
 if [ -z "${NAME}" ]; then exit 1; fi
 
 docker rm etcd
-docker run -d --name etcd quay.io/coreos/etcd /usr/local/bin/etcd \
+docker run -d --name etcd quay.io/coreos/etcd:v3.1.7 /usr/local/bin/etcd \
  --name ${NAME} \
  --advertise-client-urls http://${PUBLIC_IPV4}:2379,http://${PUBLIC_IPV4}:4001 \
  --listen-client-urls http://0.0.0.0:2379,http://0.0.0.0:4001 \
