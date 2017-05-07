@@ -13,7 +13,6 @@ ssh ${MASTER_HOST} 'sudo mv kube-apiserver.yaml /etc/kubernetes/manifests/kube-a
 rm kube-apiserver.yaml.copy
 
 # setup proxy pod
-# TODO replace with for loop and copy to all hosts
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
 scp kube-proxy.yaml ${MASTER_HOST}:
 ssh ${MASTER_HOST} 'sudo mv kube-proxy.yaml /etc/kubernetes/manifests/kube-proxy.yaml'
