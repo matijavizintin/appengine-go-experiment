@@ -6,10 +6,10 @@ do
     ssh ${host} 'sudo systemctl daemon-reload'
 
     # start flannel
-    sudo systemctl start flanneld
-    sudo systemctl enable flanneld
+    ssh ${host} 'sudo systemctl start flanneld'
+    ssh ${host} 'sudo systemctl enable flanneld'
 
     # start kubelet
-    sudo systemctl start kubelet
-    sudo systemctl enable kubelet
+    ssh ${host} 'sudo systemctl start kubelet'
+    ssh ${host} 'sudo systemctl enable kubelet'
 done
