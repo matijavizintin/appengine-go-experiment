@@ -21,3 +21,8 @@ ssh ${MASTER_HOST} 'sudo mv kube-proxy.yaml /etc/kubernetes/manifests/kube-proxy
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
 scp kube-controller-manager.yaml ${MASTER_HOST}:
 ssh ${MASTER_HOST} 'sudo mv kube-controller-manager.yaml /etc/kubernetes/manifests/kube-controller-manager.yaml'
+
+# setup scheduler
+ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
+scp kube-scheduler.yaml ${MASTER_HOST}:
+ssh ${MASTER_HOST} 'sudo mv kube-scheduler.yaml /etc/kubernetes/manifests/kube-scheduler.yaml'
