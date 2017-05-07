@@ -7,7 +7,7 @@ do
     sed -i -e "s|FLANNELD_ETCD_ENDPOINTS=ETCD_ENDPOINTS|FLANNELD_ETCD_ENDPOINTS=${ETCD_ENDPOINTS}|g" options.env.copy
 
     ssh ${host} 'sudo mkdir -p /etc/flannel'
-    scp options.env ${host}:
+    scp options.env.copy ${host}:
     ssh ${host} 'sudo mv options.env /etc/flannel/'
 
     rm options.env.copy
