@@ -26,3 +26,13 @@ ssh ${MASTER_HOST} 'sudo mv kube-controller-manager.yaml /etc/kubernetes/manifes
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
 scp kube-scheduler.yaml ${MASTER_HOST}:
 ssh ${MASTER_HOST} 'sudo mv kube-scheduler.yaml /etc/kubernetes/manifests/kube-scheduler.yaml'
+
+# setup calico
+cp calico.yaml calico.yaml.copy
+sed -i -e 's|etcd_endpoints: "ETCD_ENDPOINTS"|etcd_endpoints: "${ETCD_ENDPOINTS}"|g' calico.yaml.copy
+
+ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
+scp calico.yaml.copy ${MASTER_HOST}:calico.yaml
+ssh ${MASTER_HOST} 'sudo mv calico.yaml /etc/kubernetes/manifests/calico.yaml'
+
+rm calico.yaml.copy
