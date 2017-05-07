@@ -7,6 +7,7 @@ export ETCD2=10.132.0.4
 export ETCD_ENDPOINTS=http://${ETCD0}:2379,http://${ETCD1}:2379,http://${ETCD2}:2379
 
 export K8S_SERVICE_IP=10.3.0.1
+export SERVICE_IP_RANGE=10.3.0.0/24
 export DNS_SERVICE_IP=10.3.0.10
 
 export MASTER_HOST=10.132.0.2
