@@ -5,7 +5,7 @@ sed -i -e "s|ADVERTISE_IP|${MASTER_HOST}|g" options.env.copy
 sed -i -e "s|FLANNELD_ETCD_ENDPOINTS=ETCD_ENDPOINTS|FLANNELD_ETCD_ENDPOINTS=${ETCD_ENDPOINTS}|g" options.env.copy
 
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/flannel'
-scp options.env.copy ${MASTER_HOST}:
+scp options.env.copy ${MASTER_HOST}:options.env
 ssh ${MASTER_HOST} 'sudo mv options.env /etc/flannel/'
 
 rm options.env.copy
