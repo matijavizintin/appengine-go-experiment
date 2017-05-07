@@ -16,3 +16,8 @@ rm kube-apiserver.yaml.copy
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
 scp kube-proxy.yaml ${MASTER_HOST}:
 ssh ${MASTER_HOST} 'sudo mv kube-proxy.yaml /etc/kubernetes/manifests/kube-proxy.yaml'
+
+# setup controller-manager pod
+ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
+scp kube-controller-manager.yaml ${MASTER_HOST}:
+ssh ${MASTER_HOST} 'sudo mv kube-controller-manager.yaml /etc/kubernetes/manifests/kube-controller-manager.yaml'
