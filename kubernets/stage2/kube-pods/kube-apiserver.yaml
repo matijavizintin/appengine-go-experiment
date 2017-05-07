@@ -16,7 +16,7 @@ spec:
     - --allow-privileged=true
     - --service-cluster-ip-range=SERVICE_IP_RANGE
     - --secure-port=443
-    - --advertise-address=${COREOS_PRIVATE_IPV4}
+    - --advertise-address=ADVERTISE_ADDRESS
     - --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota
     - --tls-cert-file=/etc/kubernetes/ssl/apiserver.pem
     - --tls-private-key-file=/etc/kubernetes/ssl/apiserver-key.pem

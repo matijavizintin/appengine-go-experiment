@@ -4,6 +4,7 @@
 cp kube-apiserver.yaml kube-apiserver.yaml.copy
 sed -i -e "s|ETCD_ENDPOINTS|${ETCD_ENDPOINTS}|g" kube-apiserver.yaml.copy
 sed -i -e "s|SERVICE_IP_RANGE|${SERVICE_IP_RANGE}|g" kube-apiserver.yaml.copy
+sed -i -e "s|ADVERTISE_ADDRESS|${COREOS_PRIVATE_IPV4}|g" kube-apiserver.yaml.copy
 
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
 scp kube-apiserver.yaml.copy ${MASTER_HOST}:kube-apiserver.yaml
@@ -29,7 +30,7 @@ ssh ${MASTER_HOST} 'sudo mv kube-scheduler.yaml /etc/kubernetes/manifests/kube-s
 
 # setup calico
 cp calico.yaml calico.yaml.copy
-sed -i -e 's|etcd_endpoints: "ETCD_ENDPOINTS"|etcd_endpoints: "${ETCD_ENDPOINTS}"|g' calico.yaml.copy
+sed -i -e "s|etcd_endpoints: \"ETCD_ENDPOINTS\"|etcd_endpoints: \"${ETCD_ENDPOINTS}\"|g" calico.yaml.copy
 
 ssh ${MASTER_HOST} 'sudo mkdir -p /etc/kubernetes/manifests'
 scp calico.yaml.copy ${MASTER_HOST}:calico.yaml
