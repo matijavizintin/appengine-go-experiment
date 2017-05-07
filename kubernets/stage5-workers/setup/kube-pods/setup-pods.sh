@@ -13,3 +13,10 @@ do
 done
 
 rm kube-proxy.yaml.copy
+
+# setup kubeconfig pod
+for host in ${WORKER1_IP} ${WORKER2_IP}
+do
+    scp worker-kubeconfig.yaml ${host}:
+    ssh ${host} 'sudo mv worker-kubeconfig.yaml /etc/kubernetes/worker-kubeconfig.yaml'
+done
