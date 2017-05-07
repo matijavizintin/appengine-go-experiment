@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-copy kubelet.service kubelet.service.copy
+cp kubelet.service kubelet.service.copy
 sed -i -e s/DNS_SERVICE_IP/${DNS_SERVICE_IP}/g kubelet.service.copy
 
 scp kubelet.service.copy ${MASTER_HOST}:kubelet.service
