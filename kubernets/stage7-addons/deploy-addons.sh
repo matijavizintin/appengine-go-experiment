@@ -10,5 +10,5 @@ rm dns-addon.yml.copy*
 kubectl get pods --namespace=kube-system | grep kube-dns-v20
 
 # deploy dashboard
-#kubectl create -f kube-dashboard-rc.yaml
-#kubectl create -f kube-dashboard-svc.yaml
+kubectl create -f kube-dashboard-rc.yaml
+kubectl create -f kube-dashboard-svc.yaml
