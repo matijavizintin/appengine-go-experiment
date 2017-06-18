@@ -1,0 +1,25 @@
+[Unit]
+Description=Etcd container
+
+[Service]
+Restart=always
+RestartSec=10
+ExecStartPre=-/usr/bin/docker kill etcd
+ExecStartPre=-/usr/bin/docker rm etcd
+ExecStart=/usr/bin/docker run --rm --net=host \
+           --volume=/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt --volume=/var/lib/etcd:/etcd-data \
+           --name etcd quay.io/coreos/etcd:v3.2.0 /usr/local/bin/etcd \
+           --name ETCD_NAME \
+           --data-dir=/etcd-data \
+           --advertise-client-urls http://${COREOS_PRIVATE_IPV4}:2379 \
+           --listen-client-urls http://${COREOS_PRIVATE_IPV4}:2379 \
+           --initial-advertise-peer-urls http://${COREOS_PRIVATE_IPV4}:2380 \
+           --listen-peer-urls http://${COREOS_PRIVATE_IPV4}:2380 \
+           --initial-cluster-token etcd-cluster-1 \
+           --initial-cluster etcd0=http://ETCD0_IP:2380,etcd1=http://ETCD1_IP:2380,etcd2=http://ETCD2_IP:2380 \
+           --initial-cluster-state new
+ExecStop=/usr/bin/docker stop -t 3 etcd
+ExecStopPost=/usr/bin/docker rm etcd
+
+[Install]
+WantedBy=multi-user.target
